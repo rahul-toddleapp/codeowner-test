@@ -27,8 +27,7 @@
 # In this example, @doctocat owns any files in the build/logs
 # directory at the root of the repository and any of its
 # subdirectories.
-src/testFolder2/testFolder21/component2/ @rahul-toddleapp
-
+src/testFolder2/testFolder21/component2/ @toddle-edu/code-owner-test 
 # The `docs/*` pattern will match files like
 # `docs/getting-started.md` but not further nested files like
 # `docs/build-app/troubleshooting.md`.
