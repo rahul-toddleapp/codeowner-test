@@ -1,0 +1,33 @@
+name: "Pre-merge-commit"
+on:
+  push:
+    branches:
+      - "feature-testing/*"
+  pull_request:
+    branches: ["**"]
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GLOBAL_GITHUB_TOKEN }}
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  find_missing_locales:
+    runs-on: toddle-frontend
+    container:
+      image: node:14
+      options: --user 1000:1000
+    name: Finding Missing Locales
+    # if: ${{ inputs.branch_name == 'develop' || startsWith(inputs.branch_name, 'release-v') || startsWith(inputs.branch_name, 'test-1-v') || startsWith(inputs.branch_name, 'test-v') }}
+    steps:
+      - name: "Checkout: ${{ github.ref_name }}"
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GLOBAL_GITHUB_TOKEN }}
+          submodules: recursive
+      - name: Install Dependencies
+        run: npm i
+      - name: Missing Locales Check
+        run: echo "Missing locales"
